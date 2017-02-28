@@ -2,14 +2,16 @@
   <head>
     <title>Theater Disaster</title>
     <meta name="description" content="Panoramas and Cursors">
-    <script src="../resources/js/aframe.js"></script>
-    <script src="../resources/js/argon.min.js"></script>
-    <script src="../build.js"></script>
-    <script src="../resources/js/CSS3DArgonRenderer.js"></script>
-    <script src="../resources/js/CSS3DArgonHUD.js"></script>
-    <script src="../resources/js/aframe-look-at-component.js"></script>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <script src="/resources/aframe.js"></script>
+    <script src="/resources/argon.min.js"></script>
+    <script src="/resources/build.js"></script>
+    <script src="/resources/CSS3DArgonRenderer.js"></script>
+    <script src="/resources/CSS3DArgonHUD.js"></script>
+    <script src="/resources/aframe-look-at-component.js"></script>
     <script src="https://rawgit.com/protyze/aframe-alongpath-component/master/dist/aframe-alongpath-component.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="../resources/style.css">
+    <link rel="stylesheet" type="text/css" href="/resources/style.css">
+
   </head>
 
   <body>
@@ -22,13 +24,13 @@
       <a-assets>
         <a-asset-item id="theater-obj" src="Theatre Whole.obj"></a-asset-item>
         <a-asset-item id="theater-mtl" src="Theatre Whole.mtl"></a-asset-item>
-        <a-asset-item video id="train-video" autoplay loop="true" src="train-video.mp4">,/a-asset-item>
+        <video id="train-video" autoplay loop="true" src="train-video.mp4" playsinline></video>
       </a-assets>
 
-      <a-entity id="oceanworld" position="0 0 0">
-        <a-obj-model src="#theater-obj" mtl="#theater-mtl" rotation="-90 0 0" scale="1 1 1" position="-5 -10 -20">
+      <a-entity id="theaterworld" position="0 0 0" referenceframe='parent: ar.user; userotation: false'>
+        <a-obj-model src="#theater-obj" mtl="#theater-mtl" rotation="-90 -155 0" scale="1 1 1" position="5 -17 20">
         </a-obj-model>
-        <a-video src="#train-video" width="16" height="9" position="-5 -10 0"></a-video>
+        <a-video src="#train-video" width="57.6" height="32.4" rotation="0 205 0" position="28 7 70"></a-video>
       </a-entity>
     </ar-scene>
 
@@ -37,15 +39,15 @@
 
     <script>
 
-      var panoramas = [
-        { text: 'Georgia Aquarium', name: 'aqui' },
-        { text: 'Nemo', name: 'aqui-nemo' }
-      ];
+    var panoramas = [
+      { text: 'Georgia Aquarium', name: 'aqui' },
+      { text: 'Nemo', name: 'aqui-nemo' }
+    ];
 
 
       var arScene = document.querySelector('ar-scene');
       var cylinder = document.querySelector('a-cylinder')
-      var content = document.querySelector('#oceanworld');
+      var content = document.querySelector('#theaterworld');
 
 
       // the ar-camera has an argon reference frame attached, so when it gets it's first value,
@@ -61,22 +63,25 @@
 
 
       // get the menu element
-      //var menu = document.getElementById('menu');
-      //var button = document.createElement('button');
-      //button.textContent = "Restart Game" ;
-      //menu.appendChild(button);
-      //button.addEventListener('click', function () {
+      var menu = document.getElementById('menu');
+      var button = document.createElement('button');
+      button.textContent = "Play Video" ;
+      menu.appendChild(button);
+      button.addEventListener('click', function () {
+          const videoElement = document.querySelector("#train-video");
+          videoElement.play();
       //    arScene.sceneEl.emit('showpanorama', { name: panoramas[0].name });
       //    cylinder.setAttribute('visible', true);
-      //});
+      });
 
       AFRAME.registerComponent('cursor-listener', {
         init: function () {
           this.el.addEventListener('click', function (evt) {
-            arScene.sceneEl.emit('showpanorama', { name: panoramas[1].name });
+            //arScene.sceneEl.emit('showpanorama', { name: panoramas[1].name });
             this.setAttribute('visible', false);
             console.log('I was clicked at: ', evt.detail.intersection.point);
           });
+          this.video_el = document.querySelector(this.video_selector);
           this.el.addEventListener('mouseenter', function (evt) {
             this.setAttribute('material', 'opacity', 0.5);
           });
