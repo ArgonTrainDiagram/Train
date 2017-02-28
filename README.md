@@ -1,2 +1,12 @@
 # Train
-Train Arrival Example in Argon
+
+Train.
+
+Built with [A-Frame](https://aframe.io).
+
+## Setup
+
+```sh
+npm install
+npm run start
+```
