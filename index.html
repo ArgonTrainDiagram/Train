@@ -5,6 +5,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <script src="/resources/aframe.js"></script>
     <script src="/resources/argon.min.js"></script>
+    <script src="/resources/aframe-particle-system-component.min.js"></script>
     <script src="/resources/build.js"></script>
     <script src="/resources/CSS3DArgonRenderer.js"></script>
     <script src="/resources/CSS3DArgonHUD.js"></script>
@@ -18,9 +19,7 @@
   <body>
 
     <div id="menu" class="menu"></div>
-
-
-    <ar-scene desiredreality="src:url(../resources/reality/panorama/index.html);" panorama__aqui="src:url(panoramas/aqui.jpg);lla:-84.3951 33.7634 206;initial:true;" panorama__aqui-nemo="src:url(panoramas/aqui-nemo.jpg);lla:'-84.3931 33.7608 309';" panorama__high="src:url(panoramas/high.jpg);lla:'-84.38584 33.79035 289';" panorama__pied="src: url(panoramas/pied.jpg);lla:'-84.37427 33.78577 271';">
+    <ar-scene>
 
       <a-assets>
         <a-asset-item id="theater-obj" src="Theatre Whole.obj"></a-asset-item>
@@ -31,26 +30,28 @@
       </a-assets>
 
       <a-entity id="theaterworld" position="0 0 0" referenceframe='parent: ar.user; userotation: false'>
-        <a-obj-model src="#theater-obj" mtl="#theater-mtl" rotation="-90 -155 0" scale="1 1 1" position="5 -17 20">
+        <a-obj-model src="#theater-obj" mtl="#theater-mtl" rotation="-90 -30 0" scale="1 1 1" position="7 -17 -5">
         </a-obj-model>
-        <a-video src="#train-video" width="57.6" height="32.4" rotation="0 205 0" position="28 7 70"></a-video>
+        <a-video src="#train-video" width="57.6" height="32.4" rotation="0 -30 0" position="35 7 -50"></a-video>
 
       </a-entity>
 
       <a-entity>
         <!-- <a-box id="train" position="10 0.5 30" rotation="0 45 0" width="10" height="10" depth="10"  color="#4CC3D9"></a-box> -->
-        <a-obj-model id="train" src="#train-obj" rotation="-90 0 270" scale="0.5 0.5 0.5" position="10 -2 100">
+        <a-obj-model id="train" src="#train-obj" rotation="-90 0 40" scale="0.4 0.4 0.4" position="25 -2 -75">
         </a-obj-model>
          <a-animation
          	   id="trainAnimation"
          	   attribute="position"
                easing= "ease-out-expo"
-               from= "10 -2 100"
-               to="0 -2 -200"
-               dur="20000"
+               delay="3800"
+               from= "1005 -2 -975"
+               to="-70 -2 100"
+               dur="21000"
                begin= "one"
           ></a-animation>
       </a-entity>
+      <a-entity position="10 -5 20" particle-system="color: #FFFFFF,#FFFFFF,#FFFFFF; size: 4"></a-entity>
       <!-- <a-animation 
          	   id="trainAnimation"
          	   attribute="position"
@@ -66,12 +67,10 @@
 
 
     <script>
-
     var panoramas = [
       { text: 'Georgia Aquarium', name: 'aqui' },
       { text: 'Nemo', name: 'aqui-nemo' }
     ];
-
 
       var arScene = document.querySelector('ar-scene');
       var train = document.querySelector("#train");
