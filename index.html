@@ -26,6 +26,8 @@
         <a-asset-item id="theater-mtl" src="Theatre Whole.mtl"></a-asset-item>
         <a-asset-item id="train-obj" src="trainengine.obj"></a-asset-item>
         <a-asset-item id="train-mtl" src="trainengine.mtl"></a-asset-item>
+		<a-asset-item id="theaterCrash-obj" src="Theatre Crash.obj"></a-asset-item>
+		<a-asset-item id="theaterCrash-mtl" src="Theatre Crash.mtl"></a-asset-item>
         <video id="train-video" autoplay loop="true" src="train-video.mp4" playsinline></video>
       </a-assets>
 
@@ -33,6 +35,14 @@
         <a-obj-model src="#theater-obj" mtl="#theater-mtl" rotation="-90 -30 0" scale="1 1 1" position="7 -17 -5">
         </a-obj-model>
         <a-video src="#train-video" width="57.6" height="32.4" rotation="0 -30 0" position="35 7 -50"></a-video>
+	    <a-animation
+		       attribute="visible"
+         	   id="theaterGone"
+               delay="15500"
+			   to="false"
+               begin= "four"
+			   
+          ></a-animation>
 
       </a-entity>
 
@@ -51,15 +61,29 @@
                begin= "one"
           ></a-animation>
       </a-entity>
-      <!-- <a-animation 
-         	   id="trainAnimation"
-         	   attribute="position"
-               easing= "ease-out-expo"
-               from= "0 0.5 -2"
-               to="0 0.5 10"
-               dur="5000"
-               begin= "one"
-          ></a-animation> -->
+	  
+	  
+	    <a-entity visible="false">
+        <a-obj-model id="trainHole" src="#theaterCrash-obj" mtl="#theaterCrash-mtl" rotation="-90 -30 0" scale="2 2 2" position="-19 -32 62">
+        </a-obj-model>
+         <a-animation
+		       attribute="visible"
+         	   id="trainHoleAnimation"
+               delay="11750"
+			   to="true"
+               begin= "two"
+			   
+          ></a-animation>
+		   <a-animation
+		       attribute="visible"
+         	   id="trainHoleAnimation2"
+               delay="15500"
+			   to="false"
+               begin= "three"
+			   
+          ></a-animation>
+      </a-entity>
+	  
     </ar-scene>
 
 
@@ -74,7 +98,7 @@
       var arScene = document.querySelector('ar-scene');
       var train = document.querySelector("#train");
       var content = document.querySelector('#theaterworld');
-
+	  var hole = document.querySelector('#trainHole');
 
       // the ar-camera has an argon reference frame attached, so when it gets it's first value,
       // we'll get this event
@@ -105,8 +129,12 @@
           const videoElement = document.querySelector("#train-video");
           videoElement.play();
           train.emit('one');
+		  hole.emit('two');
+		  hole.emit('three');
+		  content.emit('four');
       //    arScene.sceneEl.emit('showpanorama', { name: panoramas[0].name });
-      //    cylinder.setAttribute('visible', true);
+      //    content.setAttribute('visible', false);
+	//	  hole.aet
       });
 
       AFRAME.registerComponent('cursor-listener', {
