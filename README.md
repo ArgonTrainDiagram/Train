@@ -4,16 +4,18 @@ This Argon Train project is based on the film L'arrivée d'un train en gare de L
 
 The user of the program starts off inside of a theater and the movie begins to play when a button on the screen is pressed. When the train comes towards the audience in the movie, a 3D model of a train comes out of the screen.
 
-![Theater Picture](/resources/theaterPicture-min.png)
+![Theater Picture](/resources/theaterPictureSmaller.png)
 
 
 Built with [A-Frame](https://aframe.io).
 
 ## Setup
-
+This project uses a node server to run.
 ```sh
 npm install
-npm run start
+npm start
 ```
+
+
 
 
