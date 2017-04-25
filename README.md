@@ -14,8 +14,21 @@ Built with [A-Frame](https://aframe.io).
 ## To Run
 This project uses a node server to run.
 ```sh
-after cloning, cd into TrainProject folder in the command prompt/terminal
-npm start
+After cloning, cd into TrainProject folder in the command prompt/terminal
+Type "npm start" into command prompt window
+To see project, open any brower and type in the host computer's ip address followed by ":7000"
+```
+
+```sh
+If it says npm is not recognized take the following steps:
+1. Open the Control Panel (Click the Start button, then click Control Panel)
+2. Click User Accounts
+3. Click Change my environment variables
+4. Select PATH and click the Edit... button
+5. At the end of the Variable value, add "C:\Program Files\nodejs"
+6. Click Ok on the "Edit User Variable" window, then click Ok on the "Environment Variables" window
+7. Start a command prompt window (Start button, then type cmd into the search and hit enter)
+8. At the prompt (C:\>) type npm and hit enter; you should now see some help text (Usage: npm <command> etc.) rather than "npm is not recognized..."
 ```
 
 
